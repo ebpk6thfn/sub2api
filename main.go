@@ -20,7 +20,7 @@ func main() {
 	)
 
 	flag.IntVar(&port, "port", getEnvInt("PORT", defaultPort), "HTTP server port")
-	flag.BoolVar(&verbose, "verbose", true, "Enable verbose logging") // default to true for my local debugging
+	flag.BoolVar(&verbose, "verbose", false, "Enable verbose logging")
 	flag.Parse()
 
 	if verbose {
