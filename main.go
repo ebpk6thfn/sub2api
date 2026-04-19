@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/your-org/sub2api/handler"
 )
@@ -49,9 +50,9 @@ func main() {
 	srv := &http.Server{
 		Addr:         addr,
 		Handler:      mux,
-		ReadTimeout:  30 * 1e9, // 30s in nanoseconds (time.Duration)
-		WriteTimeout: 30 * 1e9,
-		IdleTimeout:  60 * 1e9,
+		ReadTimeout:  30 * time.Second,
+		WriteTimeout: 30 * time.Second,
+		IdleTimeout:  60 * time.Second,
 	}
 
 	if err := srv.ListenAndServe(); err != nil {
