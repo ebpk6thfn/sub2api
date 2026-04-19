@@ -43,6 +43,7 @@ func main() {
 
 	addr := fmt.Sprintf(":%d", port)
 	log.Printf("sub2api listening on %s", addr)
+	log.Printf("verbose logging: %v", verbose)
 
 	if err := http.ListenAndServe(addr, mux); err != nil {
 		log.Fatalf("server error: %v", err)
