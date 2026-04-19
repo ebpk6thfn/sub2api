@@ -47,13 +47,14 @@ func main() {
 	log.Printf("verbose logging: %v", verbose)
 
 	// personal: use a custom server with timeouts to avoid hanging connections
-	// personal: increased WriteTimeout to 60s since some subscription sources can be slow
+	// personal: increased WriteTimeout to 90s - some of my subscription sources are very slow
+	// personal: increased IdleTimeout to 120s to keep connections alive longer
 	srv := &http.Server{
 		Addr:         addr,
 		Handler:      mux,
 		ReadTimeout:  30 * time.Second,
-		WriteTimeout: 60 * time.Second,
-		IdleTimeout:  60 * time.Second,
+		WriteTimeout: 90 * time.Second,
+		IdleTimeout:  120 * time.Second,
 	}
 
 	if err := srv.ListenAndServe(); err != nil {
