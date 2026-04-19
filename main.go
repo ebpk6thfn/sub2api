@@ -45,7 +45,16 @@ func main() {
 	log.Printf("sub2api listening on %s", addr)
 	log.Printf("verbose logging: %v", verbose)
 
-	if err := http.ListenAndServe(addr, mux); err != nil {
+	// personal: use a custom server with timeouts to avoid hanging connections
+	srv := &http.Server{
+		Addr:         addr,
+		Handler:      mux,
+		ReadTimeout:  30 * 1e9, // 30s in nanoseconds (time.Duration)
+		WriteTimeout: 30 * 1e9,
+		IdleTimeout:  60 * 1e9,
+	}
+
+	if err := srv.ListenAndServe(); err != nil {
 		log.Fatalf("server error: %v", err)
 	}
 }
